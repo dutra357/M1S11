@@ -1,7 +1,5 @@
 package com.example.demo.Entity;
-
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity
@@ -15,6 +13,7 @@ public class CadernoEntity {
     private String nome;
 
 
+    //verificar com professor
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Long usuario_id;
