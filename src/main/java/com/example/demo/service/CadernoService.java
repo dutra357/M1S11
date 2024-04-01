@@ -10,7 +10,7 @@ public interface CadernoService {
 
     public CadernoEntity getById(Long id);
 
-    public CadernoEntity update(Long id);
+    public CadernoEntity update(Long id, CadernoEntity caderno);
 
     void dell(Long id);
 }

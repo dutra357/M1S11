@@ -16,22 +16,20 @@ public class CadernoEntity {
     //verificar com professor
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Long usuario_id;
-
+    private UsuarioEntity usuarioEntity;
 
 
     public CadernoEntity(){}
-    public CadernoEntity(Long id, String nome, Long usuario_id) {
+    public CadernoEntity(Long id, String nome, UsuarioEntity usuarioEntity) {
         this.id = id;
         this.nome = nome;
-        this.usuario_id = usuario_id;
+        this.usuarioEntity = usuarioEntity;
     }
+
+
     public Long getId() {
         return id;
     }
-
-
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,11 +39,11 @@ public class CadernoEntity {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Long getUsuario_id() {
-        return usuario_id;
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
     }
-    public void setUsuario_id(Long usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
     }
 
 
@@ -56,13 +54,13 @@ public class CadernoEntity {
 
         if (!Objects.equals(id, that.id)) return false;
         if (!Objects.equals(nome, that.nome)) return false;
-        return Objects.equals(usuario_id, that.usuario_id);
+        return Objects.equals(usuarioEntity, that.usuarioEntity);
     }
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (nome != null ? nome.hashCode() : 0);
-        result = 31 * result + (usuario_id != null ? usuario_id.hashCode() : 0);
+        result = 31 * result + (usuarioEntity != null ? usuarioEntity.hashCode() : 0);
         return result;
     }
 }
