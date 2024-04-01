@@ -3,9 +3,10 @@ import com.example.demo.Entity.NotaEntity;
 import com.example.demo.service.NotasService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@RestController
+@RequestMapping("notas")
 public class NotaController {
 
     private final NotasService service;

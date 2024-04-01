@@ -1,6 +1,4 @@
-package com.example.demo.infra;
-
-
+package com.example.demo.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -12,32 +10,24 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration // Indica uma configuração no Spring
-@EnableWebSecurity // Ativa a configuração personalizada de segurança
-@EnableMethodSecurity // Ativa os métodos de segurança
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
-
-    @Bean // configuração dos filtros de segurança do Spring
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable) // desabilita o cors, não é necessário para backend puro
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/cadastro/**").permitAll() // endpoint liberado para acesso
+                        auth.requestMatchers("/cadastro/**").permitAll()
                                 .requestMatchers("/login/**").permitAll()
                                 .requestMatchers("/test/**").permitAll()
-                                // Qualquer outra requisição é restrita
                                 .anyRequest().authenticated()
                 )
-
-                // Sessão Stateless, ou seja, não há memória sobre o ultimo usário que acessou
-                // Pede crendeciais para todas as requisições restritas
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                //Controle de excessoes
                 .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint()) // Excessão de Token no Ponto de Entrada -> endpoint
-                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler())); // Excessão de Token Negado
-
-        return http.build(); // build do HttpSecurity
+                        .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+                        .accessDeniedHandler(new BearerTokenAccessDeniedHandler()));
+        return http.build();
 
 
     }

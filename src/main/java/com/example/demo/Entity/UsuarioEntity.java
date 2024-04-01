@@ -14,17 +14,16 @@ public class UsuarioEntity {
     private String nome;
 
 
-    @Column(name="login", columnDefinition = "varchar(255) not null", unique = true)
+    @Column(name="login")
     private String login;
-    @Column(name="senha", columnDefinition = "varchar(255) not null")
+    @Column(name="senha")
     private String senha;
 
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany
     private List<CadernoEntity> cadernos;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<NotaEntity> notas;{
-    }
+    @OneToMany
+    private List<NotaEntity> notas;
 
 
     public UsuarioEntity() {}

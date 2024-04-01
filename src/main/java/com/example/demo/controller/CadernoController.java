@@ -1,9 +1,12 @@
 package com.example.demo.controller;
+import com.example.demo.Entity.CadernoEntity;
 import com.example.demo.service.CadernoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
+@RestController
+@RequestMapping("cadernos")
 public class CadernoController {
 
     private final CadernoService service;
@@ -14,18 +17,18 @@ public class CadernoController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<AlunoDto> getId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorIdDto(id));
+    public ResponseEntity<CadernoEntity> getId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
     @GetMapping
-    public ResponseEntity<List<AlunoDto>> get() {
-        var resultado = service.buscarTodos();
+    public ResponseEntity<List<CadernoEntity>> get() {
+        var resultado = service.getAll();
         return ResponseEntity.ok(resultado);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AlunoEntity> put(@PathVariable Long id, @RequestBody AlunoEntity request) {
-        return ResponseEntity.ok(service.alterar(id, request));
+    public ResponseEntity<CadernoEntity> put(@PathVariable Long id, @RequestBody CadernoEntity request) {
+        return ResponseEntity.ok(service.update(id, request));
     }
 
     @DeleteMapping("{id}")
